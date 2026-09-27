@@ -1,0 +1,19 @@
+{
+  "name": "mio-remotion-output",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "react": "19.2.3",
+    "react-dom": "19.2.3",
+    "remotion": "4.0.529"
+  },
+  "devDependencies": {
+    "@remotion/cli": "4.0.529",
+    "@types/react": "19.2.7",
+    "@types/react-dom": "19.2.3",
+    "typescript": "5.9.3"
+  }
+}

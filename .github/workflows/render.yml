@@ -1,0 +1,46 @@
+name: Render and publish MP4
+
+on:
+  push:
+    branches: [main]
+    paths-ignore:
+      - 'public/**'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install Chinese fonts
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y fonts-noto-cjk
+          fc-cache -f
+
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund
+
+      - name: Check and render
+        run: |
+          npm run typecheck
+          mkdir -p public
+          npx remotion still MioRemotionDemo public/poster.png --frame=45 --props=./input-props.json
+          npx remotion render MioRemotionDemo public/mio-remotion-demo.mp4 --props=./input-props.json --codec=h264 --crf=18
+
+      - name: Publish rendered files
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add -f public/poster.png public/mio-remotion-demo.mp4
+          git commit -m "Publish rendered MP4" || exit 0
+          git push
