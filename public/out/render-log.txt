@@ -1,0 +1,610 @@
+++ cat render-mode.txt
+++ tr -d '[:space:]'
++ MODE=preview
++ echo mode=preview
+mode=preview
++ '[' preview = preview ']'
++ i=0
++ for t in 1.5 5.2 7.2 8.9 9.75 10.8 11.2 13.9 16.85 19.3 22.0 25.95 28.2 31.5 34.9 36.75 38.5 40.62 44.2 45.7 48.2 51.5 54.7 55.3 56.0 58.3 60.55 63.0
+++ python3 -c 'print(round(1.5*30))'
++ fr=45
+++ printf %03d 0
++ npx remotion still WurenVideo /tmp/st/s_000.png --frame=45 '--props={"fps":30}' --log=info
+[90mDownloading Chrome Headless Shell https://www.remotion.dev/chrome-headless-shell[39m
+Downloading from: https://remotion.media/chromium-headless-shell-linux-x64-149.0.7790.0.zip?clear
+Getting Headless Shell - 9.5 Mb/91.9 Mb
+Getting Headless Shell - 19.1 Mb/91.9 Mb
+Getting Headless Shell - 28.6 Mb/91.9 Mb
+Getting Headless Shell - 38.2 Mb/91.9 Mb
+Getting Headless Shell - 47.7 Mb/91.9 Mb
+Getting Headless Shell - 57.3 Mb/91.9 Mb
+Getting Headless Shell - 66.8 Mb/91.9 Mb
+Getting Headless Shell - 76.4 Mb/91.9 Mb
+Getting Headless Shell - 85.9 Mb/91.9 Mb
+Got Headless Shell
+Bundling 6%
+Bundling 21%
+Bundling 32%
+Bundling 43%
+Bundling 54%
+Bundling 65%
+Bundling 71%
+Bundling 76%
+Bundling 81%
+Bundling 87%
+Bundling 92%
+Bundling 98%
+Bundling 100%
+Getting composition
+⚡️ Cached bundle. Subsequent renders will be faster.
+[90mComposition          WurenVideo[39m
+[90mFormat               png[39m
+[90mOutput               /tmp/st/s_000.png[39m
+Rendered 0/1
+Rendered 0/1
+Rendered 1/1
+[34m+                    /tmp/st/s_000.png[39m
++ i=1
++ for t in 1.5 5.2 7.2 8.9 9.75 10.8 11.2 13.9 16.85 19.3 22.0 25.95 28.2 31.5 34.9 36.75 38.5 40.62 44.2 45.7 48.2 51.5 54.7 55.3 56.0 58.3 60.55 63.0
+++ python3 -c 'print(round(5.2*30))'
++ fr=156
+++ printf %03d 1
++ npx remotion still WurenVideo /tmp/st/s_001.png --frame=156 '--props={"fps":30}' --log=info
+Bundling 6%
+Bundling 23%
+Bundling 65%
+Bundling 71%
+Bundling 76%
+Bundling 81%
+Bundling 87%
+Bundling 92%
+Bundling 98%
+Bundling 100%
+Getting composition
+[90mComposition          WurenVideo[39m
+[90mFormat               png[39m
+[90mOutput               /tmp/st/s_001.png[39m
+Rendered 0/1
+Rendered 0/1
+Rendered 1/1
+[34m+                    /tmp/st/s_001.png[39m
++ i=2
++ for t in 1.5 5.2 7.2 8.9 9.75 10.8 11.2 13.9 16.85 19.3 22.0 25.95 28.2 31.5 34.9 36.75 38.5 40.62 44.2 45.7 48.2 51.5 54.7 55.3 56.0 58.3 60.55 63.0
+++ python3 -c 'print(round(7.2*30))'
++ fr=216
+++ printf %03d 2
++ npx remotion still WurenVideo /tmp/st/s_002.png --frame=216 '--props={"fps":30}' --log=info
+Bundling 6%
+Bundling 23%
+Bundling 65%
+Bundling 71%
+Bundling 76%
+Bundling 81%
+Bundling 87%
+Bundling 92%
+Bundling 98%
+Bundling 100%
+Getting composition
+[90mComposition          WurenVideo[39m
+[90mFormat               png[39m
+[90mOutput               /tmp/st/s_002.png[39m
+Rendered 0/1
+Rendered 0/1
+Rendered 1/1
+[34m+                    /tmp/st/s_002.png[39m
++ i=3
++ for t in 1.5 5.2 7.2 8.9 9.75 10.8 11.2 13.9 16.85 19.3 22.0 25.95 28.2 31.5 34.9 36.75 38.5 40.62 44.2 45.7 48.2 51.5 54.7 55.3 56.0 58.3 60.55 63.0
+++ python3 -c 'print(round(8.9*30))'
++ fr=267
+++ printf %03d 3
++ npx remotion still WurenVideo /tmp/st/s_003.png --frame=267 '--props={"fps":30}' --log=info
+Bundling 6%
+Bundling 24%
+Bundling 65%
+Bundling 71%
+Bundling 76%
+Bundling 81%
+Bundling 87%
+Bundling 92%
+Bundling 98%
+Bundling 100%
+Getting composition
+[90mComposition          WurenVideo[39m
+[90mFormat               png[39m
+[90mOutput               /tmp/st/s_003.png[39m
+Rendered 0/1
+Rendered 0/1
+Rendered 1/1
+[34m+                    /tmp/st/s_003.png[39m
++ i=4
++ for t in 1.5 5.2 7.2 8.9 9.75 10.8 11.2 13.9 16.85 19.3 22.0 25.95 28.2 31.5 34.9 36.75 38.5 40.62 44.2 45.7 48.2 51.5 54.7 55.3 56.0 58.3 60.55 63.0
+++ python3 -c 'print(round(9.75*30))'
++ fr=292
+++ printf %03d 4
++ npx remotion still WurenVideo /tmp/st/s_004.png --frame=292 '--props={"fps":30}' --log=info
+Bundling 6%
+Bundling 23%
+Bundling 65%
+Bundling 71%
+Bundling 76%
+Bundling 81%
+Bundling 87%
+Bundling 92%
+Bundling 98%
+Bundling 100%
+Getting composition
+[90mComposition          WurenVideo[39m
+[90mFormat               png[39m
+[90mOutput               /tmp/st/s_004.png[39m
+Rendered 0/1
+Rendered 0/1
+Rendered 1/1
+[34m+                    /tmp/st/s_004.png[39m
++ i=5
++ for t in 1.5 5.2 7.2 8.9 9.75 10.8 11.2 13.9 16.85 19.3 22.0 25.95 28.2 31.5 34.9 36.75 38.5 40.62 44.2 45.7 48.2 51.5 54.7 55.3 56.0 58.3 60.55 63.0
+++ python3 -c 'print(round(10.8*30))'
++ fr=324
+++ printf %03d 5
++ npx remotion still WurenVideo /tmp/st/s_005.png --frame=324 '--props={"fps":30}' --log=info
+Bundling 6%
+Bundling 23%
+Bundling 65%
+Bundling 71%
+Bundling 76%
+Bundling 81%
+Bundling 87%
+Bundling 92%
+Bundling 98%
+Bundling 100%
+Getting composition
+[90mComposition          WurenVideo[39m
+[90mFormat               png[39m
+[90mOutput               /tmp/st/s_005.png[39m
+Rendered 0/1
+Rendered 0/1
+Rendered 1/1
+[34m+                    /tmp/st/s_005.png[39m
++ i=6
++ for t in 1.5 5.2 7.2 8.9 9.75 10.8 11.2 13.9 16.85 19.3 22.0 25.95 28.2 31.5 34.9 36.75 38.5 40.62 44.2 45.7 48.2 51.5 54.7 55.3 56.0 58.3 60.55 63.0
+++ python3 -c 'print(round(11.2*30))'
++ fr=336
+++ printf %03d 6
++ npx remotion still WurenVideo /tmp/st/s_006.png --frame=336 '--props={"fps":30}' --log=info
+Bundling 6%
+Bundling 23%
+Bundling 65%
+Bundling 71%
+Bundling 76%
+Bundling 81%
+Bundling 87%
+Bundling 92%
+Bundling 98%
+Bundling 100%
+Getting composition
+[90mComposition          WurenVideo[39m
+[90mFormat               png[39m
+[90mOutput               /tmp/st/s_006.png[39m
+Rendered 0/1
+Rendered 0/1
+Rendered 1/1
+[34m+                    /tmp/st/s_006.png[39m
++ i=7
++ for t in 1.5 5.2 7.2 8.9 9.75 10.8 11.2 13.9 16.85 19.3 22.0 25.95 28.2 31.5 34.9 36.75 38.5 40.62 44.2 45.7 48.2 51.5 54.7 55.3 56.0 58.3 60.55 63.0
+++ python3 -c 'print(round(13.9*30))'
++ fr=417
+++ printf %03d 7
++ npx remotion still WurenVideo /tmp/st/s_007.png --frame=417 '--props={"fps":30}' --log=info
+Bundling 6%
+Bundling 23%
+Bundling 65%
+Bundling 71%
+Bundling 76%
+Bundling 81%
+Bundling 87%
+Bundling 92%
+Bundling 98%
+Bundling 100%
+Getting composition
+[90mComposition          WurenVideo[39m
+[90mFormat               png[39m
+[90mOutput               /tmp/st/s_007.png[39m
+Rendered 0/1
+Rendered 0/1
+Rendered 1/1
+[34m+                    /tmp/st/s_007.png[39m
++ i=8
++ for t in 1.5 5.2 7.2 8.9 9.75 10.8 11.2 13.9 16.85 19.3 22.0 25.95 28.2 31.5 34.9 36.75 38.5 40.62 44.2 45.7 48.2 51.5 54.7 55.3 56.0 58.3 60.55 63.0
+++ python3 -c 'print(round(16.85*30))'
++ fr=506
+++ printf %03d 8
++ npx remotion still WurenVideo /tmp/st/s_008.png --frame=506 '--props={"fps":30}' --log=info
+Bundling 6%
+Bundling 24%
+Bundling 65%
+Bundling 71%
+Bundling 76%
+Bundling 81%
+Bundling 87%
+Bundling 92%
+Bundling 98%
+Bundling 100%
+Getting composition
+[90mComposition          WurenVideo[39m
+[90mFormat               png[39m
+[90mOutput               /tmp/st/s_008.png[39m
+Rendered 0/1
+Rendered 0/1
+Rendered 1/1
+[34m+                    /tmp/st/s_008.png[39m
++ i=9
++ for t in 1.5 5.2 7.2 8.9 9.75 10.8 11.2 13.9 16.85 19.3 22.0 25.95 28.2 31.5 34.9 36.75 38.5 40.62 44.2 45.7 48.2 51.5 54.7 55.3 56.0 58.3 60.55 63.0
+++ python3 -c 'print(round(19.3*30))'
++ fr=579
+++ printf %03d 9
++ npx remotion still WurenVideo /tmp/st/s_009.png --frame=579 '--props={"fps":30}' --log=info
+Bundling 6%
+Bundling 23%
+Bundling 65%
+Bundling 71%
+Bundling 76%
+Bundling 81%
+Bundling 87%
+Bundling 92%
+Bundling 98%
+Bundling 100%
+Getting composition
+[90mComposition          WurenVideo[39m
+[90mFormat               png[39m
+[90mOutput               /tmp/st/s_009.png[39m
+Rendered 0/1
+Rendered 0/1
+Rendered 1/1
+[34m+                    /tmp/st/s_009.png[39m
++ i=10
++ for t in 1.5 5.2 7.2 8.9 9.75 10.8 11.2 13.9 16.85 19.3 22.0 25.95 28.2 31.5 34.9 36.75 38.5 40.62 44.2 45.7 48.2 51.5 54.7 55.3 56.0 58.3 60.55 63.0
+++ python3 -c 'print(round(22.0*30))'
++ fr=660
+++ printf %03d 10
++ npx remotion still WurenVideo /tmp/st/s_010.png --frame=660 '--props={"fps":30}' --log=info
+Bundling 6%
+Bundling 23%
+Bundling 65%
+Bundling 71%
+Bundling 76%
+Bundling 81%
+Bundling 87%
+Bundling 92%
+Bundling 98%
+Bundling 100%
+Getting composition
+[90mComposition          WurenVideo[39m
+[90mFormat               png[39m
+[90mOutput               /tmp/st/s_010.png[39m
+Rendered 0/1
+Rendered 0/1
+Rendered 1/1
+[34m+                    /tmp/st/s_010.png[39m
++ i=11
++ for t in 1.5 5.2 7.2 8.9 9.75 10.8 11.2 13.9 16.85 19.3 22.0 25.95 28.2 31.5 34.9 36.75 38.5 40.62 44.2 45.7 48.2 51.5 54.7 55.3 56.0 58.3 60.55 63.0
+++ python3 -c 'print(round(25.95*30))'
++ fr=778
+++ printf %03d 11
++ npx remotion still WurenVideo /tmp/st/s_011.png --frame=778 '--props={"fps":30}' --log=info
+Bundling 6%
+Bundling 24%
+Bundling 65%
+Bundling 71%
+Bundling 76%
+Bundling 81%
+Bundling 87%
+Bundling 92%
+Bundling 98%
+Bundling 100%
+Getting composition
+[90mComposition          WurenVideo[39m
+[90mFormat               png[39m
+[90mOutput               /tmp/st/s_011.png[39m
+Rendered 0/1
+Rendered 0/1
+Rendered 1/1
+[34m+                    /tmp/st/s_011.png[39m
++ i=12
++ for t in 1.5 5.2 7.2 8.9 9.75 10.8 11.2 13.9 16.85 19.3 22.0 25.95 28.2 31.5 34.9 36.75 38.5 40.62 44.2 45.7 48.2 51.5 54.7 55.3 56.0 58.3 60.55 63.0
+++ python3 -c 'print(round(28.2*30))'
++ fr=846
+++ printf %03d 12
++ npx remotion still WurenVideo /tmp/st/s_012.png --frame=846 '--props={"fps":30}' --log=info
+Bundling 6%
+Bundling 23%
+Bundling 65%
+Bundling 71%
+Bundling 76%
+Bundling 81%
+Bundling 87%
+Bundling 92%
+Bundling 98%
+Bundling 100%
+Getting composition
+[90mComposition          WurenVideo[39m
+[90mFormat               png[39m
+[90mOutput               /tmp/st/s_012.png[39m
+Rendered 0/1
+Rendered 0/1
+Rendered 1/1
+[34m+                    /tmp/st/s_012.png[39m
++ i=13
++ for t in 1.5 5.2 7.2 8.9 9.75 10.8 11.2 13.9 16.85 19.3 22.0 25.95 28.2 31.5 34.9 36.75 38.5 40.62 44.2 45.7 48.2 51.5 54.7 55.3 56.0 58.3 60.55 63.0
+++ python3 -c 'print(round(31.5*30))'
++ fr=945
+++ printf %03d 13
++ npx remotion still WurenVideo /tmp/st/s_013.png --frame=945 '--props={"fps":30}' --log=info
+Bundling 6%
+Bundling 23%
+Bundling 65%
+Bundling 71%
+Bundling 76%
+Bundling 81%
+Bundling 87%
+Bundling 92%
+Bundling 98%
+Bundling 100%
+Getting composition
+[90mComposition          WurenVideo[39m
+[90mFormat               png[39m
+[90mOutput               /tmp/st/s_013.png[39m
+Rendered 0/1
+Rendered 0/1
+Rendered 1/1
+[34m+                    /tmp/st/s_013.png[39m
++ i=14
++ for t in 1.5 5.2 7.2 8.9 9.75 10.8 11.2 13.9 16.85 19.3 22.0 25.95 28.2 31.5 34.9 36.75 38.5 40.62 44.2 45.7 48.2 51.5 54.7 55.3 56.0 58.3 60.55 63.0
+++ python3 -c 'print(round(34.9*30))'
++ fr=1047
+++ printf %03d 14
++ npx remotion still WurenVideo /tmp/st/s_014.png --frame=1047 '--props={"fps":30}' --log=info
+Bundling 6%
+Bundling 24%
+Bundling 65%
+Bundling 71%
+Bundling 76%
+Bundling 81%
+Bundling 87%
+Bundling 92%
+Bundling 98%
+Bundling 100%
+Getting composition
+[90mComposition          WurenVideo[39m
+[90mFormat               png[39m
+[90mOutput               /tmp/st/s_014.png[39m
+Rendered 0/1
+Rendered 0/1
+Rendered 1/1
+[34m+                    /tmp/st/s_014.png[39m
++ i=15
++ for t in 1.5 5.2 7.2 8.9 9.75 10.8 11.2 13.9 16.85 19.3 22.0 25.95 28.2 31.5 34.9 36.75 38.5 40.62 44.2 45.7 48.2 51.5 54.7 55.3 56.0 58.3 60.55 63.0
+++ python3 -c 'print(round(36.75*30))'
++ fr=1102
+++ printf %03d 15
++ npx remotion still WurenVideo /tmp/st/s_015.png --frame=1102 '--props={"fps":30}' --log=info
+Bundling 6%
+Bundling 24%
+Bundling 65%
+Bundling 71%
+Bundling 76%
+Bundling 81%
+Bundling 87%
+Bundling 92%
+Bundling 98%
+Bundling 100%
+Getting composition
+[90mComposition          WurenVideo[39m
+[90mFormat               png[39m
+[90mOutput               /tmp/st/s_015.png[39m
+Rendered 0/1
+Rendered 0/1
+Rendered 1/1
+[34m+                    /tmp/st/s_015.png[39m
++ i=16
++ for t in 1.5 5.2 7.2 8.9 9.75 10.8 11.2 13.9 16.85 19.3 22.0 25.95 28.2 31.5 34.9 36.75 38.5 40.62 44.2 45.7 48.2 51.5 54.7 55.3 56.0 58.3 60.55 63.0
+++ python3 -c 'print(round(38.5*30))'
++ fr=1155
+++ printf %03d 16
++ npx remotion still WurenVideo /tmp/st/s_016.png --frame=1155 '--props={"fps":30}' --log=info
+Bundling 6%
+Bundling 23%
+Bundling 65%
+Bundling 71%
+Bundling 76%
+Bundling 81%
+Bundling 87%
+Bundling 92%
+Bundling 98%
+Bundling 100%
+Getting composition
+[90mComposition          WurenVideo[39m
+[90mFormat               png[39m
+[90mOutput               /tmp/st/s_016.png[39m
+Rendered 0/1
+Rendered 0/1
+Rendered 1/1
+[34m+                    /tmp/st/s_016.png[39m
++ i=17
++ for t in 1.5 5.2 7.2 8.9 9.75 10.8 11.2 13.9 16.85 19.3 22.0 25.95 28.2 31.5 34.9 36.75 38.5 40.62 44.2 45.7 48.2 51.5 54.7 55.3 56.0 58.3 60.55 63.0
+++ python3 -c 'print(round(40.62*30))'
++ fr=1219
+++ printf %03d 17
++ npx remotion still WurenVideo /tmp/st/s_017.png --frame=1219 '--props={"fps":30}' --log=info
+Bundling 6%
+Bundling 23%
+Bundling 65%
+Bundling 71%
+Bundling 76%
+Bundling 81%
+Bundling 87%
+Bundling 92%
+Bundling 98%
+Bundling 100%
+Getting composition
+[90mComposition          WurenVideo[39m
+[90mFormat               png[39m
+[90mOutput               /tmp/st/s_017.png[39m
+Rendered 0/1
+Rendered 0/1
+Rendered 1/1
+[34m+                    /tmp/st/s_017.png[39m
++ i=18
++ for t in 1.5 5.2 7.2 8.9 9.75 10.8 11.2 13.9 16.85 19.3 22.0 25.95 28.2 31.5 34.9 36.75 38.5 40.62 44.2 45.7 48.2 51.5 54.7 55.3 56.0 58.3 60.55 63.0
+++ python3 -c 'print(round(44.2*30))'
++ fr=1326
+++ printf %03d 18
++ npx remotion still WurenVideo /tmp/st/s_018.png --frame=1326 '--props={"fps":30}' --log=info
+Bundling 6%
+Bundling 23%
+Bundling 65%
+Bundling 71%
+Bundling 76%
+Bundling 81%
+Bundling 87%
+Bundling 92%
+Bundling 98%
+Bundling 100%
+Getting composition
+[90mComposition          WurenVideo[39m
+[90mFormat               png[39m
+[90mOutput               /tmp/st/s_018.png[39m
+Rendered 0/1
+Rendered 0/1
+Rendered 1/1
+[34m+                    /tmp/st/s_018.png[39m
++ i=19
++ for t in 1.5 5.2 7.2 8.9 9.75 10.8 11.2 13.9 16.85 19.3 22.0 25.95 28.2 31.5 34.9 36.75 38.5 40.62 44.2 45.7 48.2 51.5 54.7 55.3 56.0 58.3 60.55 63.0
+++ python3 -c 'print(round(45.7*30))'
++ fr=1371
+++ printf %03d 19
++ npx remotion still WurenVideo /tmp/st/s_019.png --frame=1371 '--props={"fps":30}' --log=info
+Bundling 6%
+Bundling 23%
+Bundling 65%
+Bundling 71%
+Bundling 76%
+Bundling 81%
+Bundling 87%
+Bundling 92%
+Bundling 98%
+Bundling 100%
+Getting composition
+[90mComposition          WurenVideo[39m
+[90mFormat               png[39m
+[90mOutput               /tmp/st/s_019.png[39m
+Rendered 0/1
+Rendered 0/1
+Rendered 1/1
+[34m+                    /tmp/st/s_019.png[39m
++ i=20
++ for t in 1.5 5.2 7.2 8.9 9.75 10.8 11.2 13.9 16.85 19.3 22.0 25.95 28.2 31.5 34.9 36.75 38.5 40.62 44.2 45.7 48.2 51.5 54.7 55.3 56.0 58.3 60.55 63.0
+++ python3 -c 'print(round(48.2*30))'
++ fr=1446
+++ printf %03d 20
++ npx remotion still WurenVideo /tmp/st/s_020.png --frame=1446 '--props={"fps":30}' --log=info
+Bundling 6%
+Bundling 23%
+Bundling 65%
+Bundling 71%
+Bundling 76%
+Bundling 81%
+Bundling 87%
+Bundling 92%
+Bundling 98%
+Bundling 100%
+Getting composition
+[90mComposition          WurenVideo[39m
+[90mFormat               png[39m
+[90mOutput               /tmp/st/s_020.png[39m
+Rendered 0/1
+Rendered 0/1
+Rendered 1/1
+[34m+                    /tmp/st/s_020.png[39m
++ i=21
++ for t in 1.5 5.2 7.2 8.9 9.75 10.8 11.2 13.9 16.85 19.3 22.0 25.95 28.2 31.5 34.9 36.75 38.5 40.62 44.2 45.7 48.2 51.5 54.7 55.3 56.0 58.3 60.55 63.0
+++ python3 -c 'print(round(51.5*30))'
++ fr=1545
+++ printf %03d 21
++ npx remotion still WurenVideo /tmp/st/s_021.png --frame=1545 '--props={"fps":30}' --log=info
+Bundling 6%
+Bundling 23%
+Bundling 65%
+Bundling 71%
+Bundling 76%
+Bundling 81%
+Bundling 87%
+Bundling 92%
+Bundling 98%
+Bundling 100%
+Getting composition
+[90mComposition          WurenVideo[39m
+[90mFormat               png[39m
+[90mOutput               /tmp/st/s_021.png[39m
+Rendered 0/1
+Rendered 0/1
+Rendered 1/1
+[34m+                    /tmp/st/s_021.png[39m
++ i=22
++ for t in 1.5 5.2 7.2 8.9 9.75 10.8 11.2 13.9 16.85 19.3 22.0 25.95 28.2 31.5 34.9 36.75 38.5 40.62 44.2 45.7 48.2 51.5 54.7 55.3 56.0 58.3 60.55 63.0
+++ python3 -c 'print(round(54.7*30))'
++ fr=1641
+++ printf %03d 22
++ npx remotion still WurenVideo /tmp/st/s_022.png --frame=1641 '--props={"fps":30}' --log=info
+Bundling 6%
+Bundling 24%
+Bundling 65%
+Bundling 71%
+Bundling 76%
+Bundling 81%
+Bundling 87%
+Bundling 92%
+Bundling 98%
+Bundling 100%
+Getting composition
+[90mComposition          WurenVideo[39m
+[90mFormat               png[39m
+[90mOutput               /tmp/st/s_022.png[39m
+Rendered 0/1
+Rendered 0/1
+
+[31mAn error occurred:[39m
+[31m[41m[37m TypeError [39m[31m[49m[39m [31mCannot read properties of undefined (reading 'motif')[39m
+
+at [4msrc/scenes.tsx:464[24m
+[90m462[39m │ [90m  f.inv = lt < 0.05 && k % 2 === 0;[39m
+[90m463[39m │ [90m  f.flash = k % 2 ? 0.35 * Math.exp(-lt * 12) : 0;[39m
+464 │   f.ry += (k % 2 ? -1 : 1) * 10 * Math.exp(-lt * 6);
+[90m465[39m │ [90m  f.gray = CH[k].motif === 'mono';[39m
+[90m466[39m │ [90m  return f;[39m
+[90m467[39m │ [90m}[39m
+
+
+at [4msrc/Video.tsx:11[24m
+[90m 9[39m │ [90m  for (let i = 0; i < CH.length; i++) if (t >= CH[i].start && t < CH[i].end) return i;[39m
+[90m10[39m │ [90m  return 5;[39m
+11 │ };
+[90m12[39m │ [90mconst fxOf = (idx: number, t: number): Fx => (idx === -1 ? introFx(t) : idx === 5 ? finFx(t) : charFx(idx, t));[39m
+[90m13[39m │ [90mconst SceneNode: React.FC<{idx: number; t: number}> = ({idx, t}) =>[39m
+[90m14[39m │ [90m  idx === -1 ? <Intro t={t} /> : idx === 5 ? <Finale t={t} /> : <CharScene i={idx} t={t} />;[39m
+
+at [4msrc/Video.tsx:78[24m
+[90m76[39m │ [90mlet content: React.ReactNode;[39m
+[90m77[39m │ [90mif (typ === null) {[39m
+78 │   content = <Scene idx={idx} t={t} fx={fxA} />;
+[90m79[39m │ [90m} else {[39m
+[90m80[39m │ [90m  const fxB = fxOf(idx + 1, t);[39m
+[90m81[39m │ [90m  const A = (style?: React.CSSProperties) => <Scene idx={idx} t={t} fx={fxA} style={style} />;[39m
+[90mat renderWithHooks [94m(node_modules/react-dom/cjs/react-dom-client.production.js:4350)[39m[90m[39m
+[90mat updateFunctionComponent [94m(node_modules/react-dom/cjs/react-dom-client.production.js:6496)[39m[90m[39m
+[90mat beginWork [94m(node_modules/react-dom/cjs/react-dom-client.production.js:7472)[39m[90m[39m
+[90mat performUnitOfWork [94m(node_modules/react-dom/cjs/react-dom-client.production.js:11304)[39m[90m[39m
+[90mat workLoopSync [94m(node_modules/react-dom/cjs/react-dom-client.production.js:11181)[39m[90m[39m
+[90mat renderRootSync [94m(node_modules/react-dom/cjs/react-dom-client.production.js:11162)[39m[90m[39m
+[90mat performWorkOnRoot [94m(node_modules/react-dom/cjs/react-dom-client.production.js:10727)[39m[90m[39m
+[90mat performWorkOnRootViaSchedulerTask [94m(node_modules/react-dom/cjs/react-dom-client.production.js:12077)[39m[90m[39m
+[90mat performWorkUntilDeadline [94m(node_modules/scheduler/cjs/scheduler.production.js:150)[39m[90m[39m
+exit_code=1
