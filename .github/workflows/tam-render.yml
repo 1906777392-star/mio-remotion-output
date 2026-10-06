@@ -33,26 +33,37 @@ jobs:
 
       - name: Fetch source and assets
         run: |
-          set -e
+          mkdir -p tam-out /tmp/a
+          LOG=tam-out/fetch-log.txt
+          : > $LOG
           R=https://tmp-video.miaohuixiaowu.top/f/8fb0ba895bdd43629813
-          mkdir -p /tmp/a
+          # KV 键名 = tam-<文件名>（源码包上传时就叫 tam-src.tgz，所以键是 tam-tam-src.tgz）
+          fail=0
           for f in tam-src.tgz bgm.mp3 xi.jpg chao.jpg shuang.jpg xin.jpg ru.jpg noise.png; do
-            curl -fsSL --retry 6 --retry-all-errors -o /tmp/a/$f $R/tam-$f
+            code=$(curl -sS -L --retry 6 --retry-all-errors --max-time 180 -o /tmp/a/$f -w '%{http_code}' $R/tam-$f 2>>$LOG)
+            rc=$?
+            echo "key=tam-$f rc=$rc http=$code size=$(wc -c < /tmp/a/$f 2>/dev/null)" >> $LOG
+            [ $rc -eq 0 ] && [ "$code" = "200" ] || fail=1
           done
-          chk(){ s=$(sha256sum /tmp/a/$1 | cut -c1-16); if [ "$s" != "$2" ]; then echo "$1 checksum mismatch $s"; exit 1; fi; }
-          chk tam-src.tgz 47291a0ad6ba594e
-          chk bgm.mp3 efa1a218699f6b81
-          chk xi.jpg e48d3b0a34012efc
-          chk chao.jpg 354a9fbd1df87dc2
-          chk shuang.jpg e9c4469991cf5f04
-          chk xin.jpg a0853d0bb327914a
-          chk ru.jpg f33868c3d2a3e233
-          chk noise.png dbf6a374526506d9
+          cat > /tmp/a/SUMS <<'EOF'
+          47291a0ad6ba594e262efb841391e10e497358ee89fad32830188823c2ddc6e1  tam-src.tgz
+          efa1a218699f6b812a709b3eb603da0314f3b460b88d6678c1f0f10e6bd9945a  bgm.mp3
+          e48d3b0a34012efc39dee667722cd61b7abf48615c4dad0e1feb849cb40644a5  xi.jpg
+          354a9fbd1df87dc2f9d42e98b62b3c9f94093533ced9eee44bf1afd929571315  chao.jpg
+          e9c4469991cf5f0457cf6fdd8fe5a7fa5e6f6a2d95fe95d3462bb6c1c2e529f2  shuang.jpg
+          a0853d0bb327914a33820c9934daf7461bfb7f5750e13694f3bb623179c4f10d  xin.jpg
+          f33868c3d2a3e23105a11e5a13657c2653a9cd1892a74252538a057570a198b2  ru.jpg
+          dbf6a374526506d97ff7053aee561f04bb31d5dd72fe191c2b5291edbf770fa8  noise.png
+          EOF
+          sed -i 's/^ *//' /tmp/a/SUMS
+          (cd /tmp/a && sha256sum -c SUMS) >> $LOG 2>&1 || fail=1
+          cat $LOG
+          [ $fail -eq 0 ] || exit 1
           rm -rf src public package.json package-lock.json tsconfig.json remotion.config.ts
           tar xzf /tmp/a/tam-src.tgz
           mkdir -p public
           for f in bgm.mp3 xi.jpg chao.jpg shuang.jpg xin.jpg ru.jpg noise.png; do cp /tmp/a/$f public/$f; done
-          ls src public
+          ls src public | tee -a $LOG
 
       - name: Install dependencies
         run: npm install --no-audit --no-fund
@@ -99,8 +110,11 @@ jobs:
       - name: Publish
         if: always()
         run: |
+          mkdir -p tam-out
+          [ -n "$(ls -A tam-out)" ] || echo "no output" > tam-out/fetch-log.txt
           git config user.name github-actions[bot]
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
           git add -f tam-out
           git commit -m "Publish TheyAndMio ($(cat tam-mode.txt | tr -d '[:space:]'))" || exit 0
+          git pull --rebase origin tam-render || true
           git push origin HEAD:tam-render
