@@ -1,4 +1,4 @@
-name: Render and publish MP4
+name: Wuren video render
 
 on:
   push:
@@ -10,10 +10,14 @@ on:
 permissions:
   contents: write
 
+concurrency:
+  group: wuren-render
+  cancel-in-progress: true
+
 jobs:
   render:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 340
     steps:
       - uses: actions/checkout@v4
 
@@ -21,26 +25,66 @@ jobs:
         with:
           node-version: 22
 
-      - name: Install Chinese fonts
+      - name: Fonts and FFmpeg
         run: |
           sudo apt-get update
-          sudo apt-get install -y fonts-noto-cjk
+          sudo apt-get install -y fonts-noto-cjk fonts-noto-cjk-extra ffmpeg
           fc-cache -f
 
       - name: Install dependencies
         run: npm install --no-audit --no-fund
 
-      - name: Check and render
+      - name: Fetch source and assets
         run: |
-          npm run typecheck
+          set -e
+          R=https://tmp-video.miaohuixiaowu.top/f/8fb0ba895bdd43629813
           mkdir -p public
-          npx remotion still MioRemotionDemo public/poster.png --frame=45 --props=./input-props.json
-          npx remotion render MioRemotionDemo public/mio-remotion-demo.mp4 --props=./input-props.json --codec=h264 --crf=18
+          for f in xi.jpg chao.jpg shuang.jpg xin.jpg ru.jpg bgm.mp3 noise.png src.tgz; do
+            curl -fsSL --retry 6 --retry-all-errors -o /tmp/$f $R/$f
+          done
+          chk(){ s=$(sha256sum /tmp/$1 | cut -c1-16); if [ "$s" != "$2" ]; then echo "$1 checksum mismatch $s"; exit 1; fi; }
+          chk bgm.mp3 12ef5c19466733b2
+          chk chao.jpg 5eeb3ea1cdf110a6
+          chk ru.jpg 3efda700d1feea00
+          chk shuang.jpg 583e546c19a7aad7
+          chk xi.jpg 0c5db7ac6acc56ac
+          chk xin.jpg 0fa570f88031f839
+          chk noise.png efeb9d7771d268a0
+          chk src.tgz ee3cd50be15cddbf
+          for f in xi.jpg chao.jpg shuang.jpg xin.jpg ru.jpg bgm.mp3 noise.png; do cp /tmp/$f public/$f; done
+          rm -rf src && tar xzf /tmp/src.tgz
+          ls src public
 
-      - name: Publish rendered files
+      - name: Render
+        run: |
+          set -e
+          MODE=$(cat render-mode.txt | tr -d '[:space:]')
+          echo "mode=$MODE"
+          mkdir -p public/out /tmp/st
+          mux(){ ffmpeg -nostdin -v error -y -i "$1" -i public/bgm.mp3 -map 0:v:0 -map 1:a:0 -c:v copy -af "atrim=0:65,afade=t=out:st=63.6:d=1.4" -c:a aac -b:a 192k -t 65 -movflags +faststart "$2"; }
+          if [ "$MODE" = "preview" ]; then
+            i=0
+            for t in 1.5 5.2 7.2 8.9 9.75 10.8 11.2 13.9 16.85 19.3 22.0 25.95 28.2 31.5 34.9 36.75 38.5 40.62 44.2 45.7 48.2 51.5 54.7 55.3 56.0 58.3 60.55 63.0; do
+              fr=$(python3 -c "print(round($t*30))")
+              npx remotion still WurenVideo /tmp/st/s_$(printf %03d $i).png --frame=$fr --props='{"fps":30}' --log=error
+              i=$((i+1))
+            done
+            ffmpeg -nostdin -v error -y -framerate 1 -i /tmp/st/s_%03d.png -vf "scale=640:480,tile=4x7:padding=6:color=black" -frames:v 1 -q:v 3 public/out/wuren-keyframes.jpg
+            npx remotion render WurenVideo /tmp/draft.mp4 --props='{"fps":30}' --scale=0.5 --codec=h264 --crf=25 --concurrency=4 --log=error
+            mux /tmp/draft.mp4 public/out/wuren-draft-960x720-30fps.mp4
+          else
+            npx remotion render WurenVideo /tmp/final.mp4 --props='{"fps":120}' --codec=h264 --crf=20 --concurrency=4 --log=error
+            mux /tmp/final.mp4 /tmp/wuren-final.mp4
+            ffprobe -v error -show_entries format=duration,size:stream=codec_name,width,height,r_frame_rate,pix_fmt -of default=nw=1 /tmp/wuren-final.mp4 > public/out/wuren-final-info.txt
+            sha256sum /tmp/wuren-final.mp4 | cut -d' ' -f1 >> public/out/wuren-final-info.txt
+            split -b 40m -d -a 2 /tmp/wuren-final.mp4 public/out/wuren-final.mp4.part
+          fi
+          ls -la public/out
+
+      - name: Publish
         run: |
           git config user.name github-actions[bot]
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
-          git add -f public/poster.png public/mio-remotion-demo.mp4
-          git commit -m "Publish rendered MP4" || exit 0
+          git add -f public/out
+          git commit -m "Publish wuren render ($(cat render-mode.txt | tr -d '[:space:]'))" || exit 0
           git push
