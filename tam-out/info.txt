@@ -1,0 +1,10 @@
+codec_name=h264
+width=960
+height=720
+pix_fmt=yuvj420p
+r_frame_rate=30/1
+codec_name=aac
+r_frame_rate=0/0
+duration=148.266667
+size=26530098
+ea8446a0c50eb328c75a1715b90262e83609b1b9d7b1c7a7efb07696727acb3f
