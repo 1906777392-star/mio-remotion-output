@@ -1,0 +1,106 @@
+name: TheyAndMio render
+
+on:
+  push:
+    branches: [tam-render]
+    paths-ignore:
+      - 'tam-out/**'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: tam-render
+  cancel-in-progress: true
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    timeout-minutes: 340
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Fonts and FFmpeg
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y fonts-noto-cjk fonts-noto-cjk-extra fonts-dejavu-core ffmpeg
+          fc-cache -f
+
+      - name: Fetch source and assets
+        run: |
+          set -e
+          R=https://tmp-video.miaohuixiaowu.top/f/8fb0ba895bdd43629813
+          mkdir -p /tmp/a
+          for f in tam-src.tgz bgm.mp3 xi.jpg chao.jpg shuang.jpg xin.jpg ru.jpg noise.png; do
+            curl -fsSL --retry 6 --retry-all-errors -o /tmp/a/$f $R/tam-$f
+          done
+          chk(){ s=$(sha256sum /tmp/a/$1 | cut -c1-16); if [ "$s" != "$2" ]; then echo "$1 checksum mismatch $s"; exit 1; fi; }
+          chk tam-src.tgz 47291a0ad6ba594e
+          chk bgm.mp3 efa1a218699f6b81
+          chk xi.jpg e48d3b0a34012efc
+          chk chao.jpg 354a9fbd1df87dc2
+          chk shuang.jpg e9c4469991cf5f04
+          chk xin.jpg a0853d0bb327914a
+          chk ru.jpg f33868c3d2a3e233
+          chk noise.png dbf6a374526506d9
+          rm -rf src public package.json package-lock.json tsconfig.json remotion.config.ts
+          tar xzf /tmp/a/tam-src.tgz
+          mkdir -p public
+          for f in bgm.mp3 xi.jpg chao.jpg shuang.jpg xin.jpg ru.jpg noise.png; do cp /tmp/a/$f public/$f; done
+          ls src public
+
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund
+
+      - name: Render
+        run: |
+          mkdir -p tam-out /tmp/st
+          set +e
+          (
+            set -ex
+            MODE=$(cat tam-mode.txt | tr -d '[:space:]')
+            echo "mode=$MODE"
+            npx tsc --noEmit
+            if [ "$MODE" = "preview" ]; then
+              i=0
+              for t in 2 7 10 14 18 22 27 31 36 40 45 52 57 61 66 72 80 86 93 100 112 120 126 133 139 145; do
+                fr=$(python3 -c "print(round($t*30))")
+                npx remotion still TheyAndMio-Preview /tmp/st/s_$(printf %03d $i).png --frame=$fr --scale=0.5 --log=error
+                i=$((i+1))
+              done
+              ffmpeg -nostdin -v error -y -framerate 1 -i /tmp/st/s_%03d.png -vf "scale=480:360,tile=4x7:padding=6:color=black" -frames:v 1 -q:v 3 tam-out/关键帧.jpg
+              START=$(date +%s)
+              npx remotion render TheyAndMio-Preview /tmp/preview.mp4 --scale=0.5 --codec=h264 --crf=24 --pixel-format=yuv420p --audio-codec=aac --audio-bitrate=192k --concurrency=4 --log=info
+              echo "render_seconds=$(( $(date +%s) - START ))"
+              OUT=tam-out/preview-960x720-30fps.mp4
+              ffmpeg -nostdin -v error -y -i /tmp/preview.mp4 -c copy -movflags +faststart $OUT
+            else
+              START=$(date +%s)
+              npx remotion render TheyAndMio-Final /tmp/final.mp4 --codec=h264 --crf=18 --pixel-format=yuv420p --audio-codec=aac --audio-bitrate=256k --concurrency=4 --log=info
+              echo "render_seconds=$(( $(date +%s) - START ))"
+              ffmpeg -nostdin -v error -y -i /tmp/final.mp4 -c copy -movflags +faststart /tmp/final-fs.mp4
+              OUT=/tmp/final-fs.mp4
+              split -b 40m -d -a 2 $OUT tam-out/final-1920x1440-60fps.mp4.part
+            fi
+            ffprobe -v error -show_entries format=duration,size:stream=codec_name,width,height,r_frame_rate,pix_fmt -of default=nw=1 $OUT > tam-out/info.txt
+            sha256sum $OUT | cut -d' ' -f1 >> tam-out/info.txt
+            ls -la tam-out
+          ) > tam-out/render-log.txt 2>&1
+          rc=$?
+          echo "exit_code=$rc" >> tam-out/render-log.txt
+          tail -n 60 tam-out/render-log.txt
+          exit $rc
+
+      - name: Publish
+        if: always()
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add -f tam-out
+          git commit -m "Publish TheyAndMio ($(cat tam-mode.txt | tr -d '[:space:]'))" || exit 0
+          git push origin HEAD:tam-render
