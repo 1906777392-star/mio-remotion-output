@@ -73,12 +73,12 @@ jobs:
               done
               ffmpeg -nostdin -v error -y -framerate 1 -i /tmp/st/s_%03d.png -vf "scale=640:480,tile=4x7:padding=6:color=black" -frames:v 1 -q:v 3 public/out/wuren-keyframes.jpg
               START=$(date +%s)
-              npx remotion render WurenVideo /tmp/draft.mp4 --props='{"fps":30}' --scale=0.5 --codec=h264 --crf=25 --concurrency=4 --log=info
+              npx remotion render WurenVideo /tmp/draft.mp4 --props='{"fps":30}' --scale=0.5 --codec=h264 --crf=25 --pixel-format=yuv420p --concurrency=4 --log=info
               echo "draft_render_seconds=$(( $(date +%s) - START ))"
               mux /tmp/draft.mp4 public/out/wuren-draft-960x720-30fps.mp4
             else
               START=$(date +%s)
-              npx remotion render WurenVideo /tmp/final.mp4 --props='{"fps":120}' --codec=h264 --crf=20 --concurrency=4 --log=info
+              npx remotion render WurenVideo /tmp/final.mp4 --props='{"fps":120}' --codec=h264 --crf=20 --pixel-format=yuv420p --concurrency=4 --log=info
               echo "final_render_seconds=$(( $(date +%s) - START ))"
               mux /tmp/final.mp4 /tmp/wuren-final.mp4
               ffprobe -v error -show_entries format=duration,size:stream=codec_name,width,height,r_frame_rate,pix_fmt -of default=nw=1 /tmp/wuren-final.mp4 > public/out/wuren-final-info.txt
