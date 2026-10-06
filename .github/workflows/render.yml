@@ -50,7 +50,7 @@ jobs:
           chk xi.jpg 0c5db7ac6acc56ac
           chk xin.jpg 0fa570f88031f839
           chk noise.png efeb9d7771d268a0
-          chk src.tgz ee3cd50be15cddbf
+          chk src.tgz 948da90b9d78700a
           for f in xi.jpg chao.jpg shuang.jpg xin.jpg ru.jpg bgm.mp3 noise.png; do cp /tmp/$f public/$f; done
           rm -rf src && tar xzf /tmp/src.tgz
           ls src public
