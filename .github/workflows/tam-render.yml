@@ -34,12 +34,13 @@ jobs:
       - name: Fetch source and assets
         run: |
           mkdir -p tam-out /tmp/a
+          MODE=$(cat tam-mode.txt | tr -d '[:space:]')
           LOG=tam-out/fetch-log.txt
           : > $LOG
           R=https://tmp-video.miaohuixiaowu.top/f/8fb0ba895bdd43629813
-          # KV 键名 = tam-<文件名>（源码包上传时就叫 tam-src.tgz，所以键是 tam-tam-src.tgz）
           fail=0
-          for f in tam-src.tgz bgm.mp3 xi.jpg chao.jpg shuang.jpg xin.jpg ru.jpg noise.png; do
+          if [ "$MODE" = "sample" ]; then FILES="bgm.mp3 xi.jpg chao.jpg shuang.jpg noise.png"; else FILES="tam-src.tgz bgm.mp3 xi.jpg chao.jpg shuang.jpg xin.jpg ru.jpg noise.png"; fi
+          for f in $FILES; do
             code=$(curl -sS -L --retry 6 --retry-all-errors --max-time 180 -o /tmp/a/$f -w '%{http_code}' $R/tam-$f 2>>$LOG)
             rc=$?
             echo "key=tam-$f rc=$rc http=$code size=$(wc -c < /tmp/a/$f 2>/dev/null)" >> $LOG
@@ -56,13 +57,13 @@ jobs:
           dbf6a374526506d97ff7053aee561f04bb31d5dd72fe191c2b5291edbf770fa8  noise.png
           EOF
           sed -i 's/^ *//' /tmp/a/SUMS
-          (cd /tmp/a && sha256sum -c SUMS) >> $LOG 2>&1 || fail=1
+          (cd /tmp/a && sha256sum -c --ignore-missing SUMS) >> $LOG 2>&1 || fail=1
           cat $LOG
           [ $fail -eq 0 ] || exit 1
           rm -rf src public package.json package-lock.json tsconfig.json remotion.config.ts
-          tar xzf /tmp/a/tam-src.tgz
+          if [ "$MODE" = "sample" ]; then cp -r tam-src/. . ; else tar xzf /tmp/a/tam-src.tgz; fi
           mkdir -p public
-          for f in bgm.mp3 xi.jpg chao.jpg shuang.jpg xin.jpg ru.jpg noise.png; do cp /tmp/a/$f public/$f; done
+          for f in $FILES; do [ "$f" = "tam-src.tgz" ] || cp /tmp/a/$f public/$f; done
           ls src public | tee -a $LOG
 
       - name: Install dependencies
@@ -77,7 +78,21 @@ jobs:
             MODE=$(cat tam-mode.txt | tr -d '[:space:]')
             echo "mode=$MODE"
             npx tsc --noEmit
-            if [ "$MODE" = "preview" ]; then
+            if [ "$MODE" = "sample" ]; then
+              E=src/sample/index.ts
+              i=0
+              for t in 0.4 1.3 2.7 3.9 5.4 6.4 7.7 9.5; do
+                fr=$(python3 -c "print(round($t*30))")
+                npx remotion still $E TheyAndMio-Sample /tmp/st/s_$(printf %03d $i).png --frame=$fr --scale=0.5 --log=error
+                i=$((i+1))
+              done
+              ffmpeg -nostdin -v error -y -framerate 1 -i /tmp/st/s_%03d.png -vf "scale=480:360,tile=4x2:padding=6:color=black" -frames:v 1 -q:v 3 "tam-out/小样关键帧.jpg"
+              START=$(date +%s)
+              npx remotion render $E TheyAndMio-Sample /tmp/sample.mp4 --scale=0.5 --codec=h264 --crf=19 --pixel-format=yuv420p --audio-codec=aac --audio-bitrate=192k --concurrency=4 --log=info
+              echo "render_seconds=$(( $(date +%s) - START ))"
+              OUT="tam-out/动态小样-960x720-30帧.mp4"
+              ffmpeg -nostdin -v error -y -i /tmp/sample.mp4 -c copy -movflags +faststart "$OUT"
+            elif [ "$MODE" = "preview" ]; then
               i=0
               for t in 2 7 10 14 18 22 27 31 36 40 45 52 57 61 66 72 80 86 93 100 112 120 126 133 139 145; do
                 fr=$(python3 -c "print(round($t*30))")
@@ -98,8 +113,8 @@ jobs:
               OUT=/tmp/final-fs.mp4
               split -b 40m -d -a 2 $OUT tam-out/final-1920x1440-60fps.mp4.part
             fi
-            ffprobe -v error -show_entries format=duration,size:stream=codec_name,width,height,r_frame_rate,pix_fmt -of default=nw=1 $OUT > tam-out/info.txt
-            sha256sum $OUT | cut -d' ' -f1 >> tam-out/info.txt
+            ffprobe -v error -show_entries format=duration,size:stream=codec_name,width,height,r_frame_rate,pix_fmt -of default=nw=1 "$OUT" > tam-out/info.txt
+            sha256sum "$OUT" | cut -d' ' -f1 >> tam-out/info.txt
             ls -la tam-out
           ) > tam-out/render-log.txt 2>&1
           rc=$?
