@@ -1,38 +1,19 @@
-key=tam-tam-src.tgz rc=0 http=200 size=48608
 key=tam-bgm.mp3 rc=0 http=200 size=2371987
 key=tam-xi.jpg rc=0 http=200 size=142829
 key=tam-chao.jpg rc=0 http=200 size=245176
 key=tam-shuang.jpg rc=0 http=200 size=112588
-key=tam-xin.jpg rc=0 http=200 size=183300
-key=tam-ru.jpg rc=0 http=200 size=93849
 key=tam-noise.png rc=0 http=200 size=65917
-tam-src.tgz: OK
 bgm.mp3: OK
 xi.jpg: OK
 chao.jpg: OK
 shuang.jpg: OK
-xin.jpg: OK
-ru.jpg: OK
 noise.png: OK
 public:
 bgm.mp3
 chao.jpg
 noise.png
-ru.jpg
 shuang.jpg
 xi.jpg
-xin.jpg
 
 src:
-Root.tsx
-Video.tsx
-bookends.tsx
-common.tsx
-env.ts
-index.ts
-lib.ts
-pixel.tsx
-pixelStory.tsx
-room.tsx
-sceneB.tsx
-sceneDF.tsx
+sample
